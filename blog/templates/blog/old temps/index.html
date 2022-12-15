@@ -1,0 +1,28 @@
+<html lang="en">
+<head>
+    <!-- <link rel="stylesheet" href="./style.css"> -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    p {
+        color: rgb(21, 88, 32);
+    }
+</style>
+<body>
+    <h2>Go to admin page: <a href="http://127.0.0.1:8000/admin/">Click Here</a></h2>
+
+    <center>
+        {% for article in articles %}
+            <article>
+                <img src="{{article.thumbnail.url}}" alt="{{article.title}}" width="400">
+                <h1><a href="{% url 'blog:detail' article.slug %}">{{article.title}}</a></h1>
+                <small>{{article.publish}}</small>
+                <p>{{article.description}}</p>
+            </article>
+        {% endfor %}
+    </center>
+</body>
+</html>
