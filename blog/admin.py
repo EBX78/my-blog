@@ -2,8 +2,8 @@ from django.contrib import admin
 from .models import Article, Category
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('position', 'title', 'slug', 'status')    # show article info and sort with this info
-    list_filter = (['status'])    # filter articles
+    list_display = ('position', 'title', 'slug', 'status')    # show category info and sort with this info
+    list_filter = (['status'])    # filter categories
     search_fields = ('title', 'slug')    # add search field
     prepopulated_fields = {'slug':('title',)}    # auto fill 'slug' field with 'title' content
 
