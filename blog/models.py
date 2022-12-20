@@ -9,7 +9,7 @@ class Category(models.Model):
     status = models.BooleanField(default=True, verbose_name='أیا نمایش داده شود؟')
     position = models.IntegerField(verbose_name='پوزیشن')
 
-    # change Article title name to persian name
+    # change Category title name to persian name
     class Meta:
         verbose_name = 'دسته بندی'
         verbose_name_plural = 'دسته بندی ها'
