@@ -9,13 +9,13 @@ class Category(models.Model):
     status = models.BooleanField(default=True, verbose_name='أیا نمایش داده شود؟')
     position = models.IntegerField(verbose_name='پوزیشن')
 
-    # change Category title name to persian name
+    # change category title name to persian name
     class Meta:
         verbose_name = 'دسته بندی'
         verbose_name_plural = 'دسته بندی ها'
         ordering = ['position']
 
-    # show articles by title
+    # show category by title
     def __str__(self):
         return self.title
 
@@ -26,7 +26,7 @@ class Article(models.Model):
     )
     title = models.CharField(max_length=200, verbose_name='عنوان')
     slug = models.SlugField(max_length=100, unique=True, verbose_name='آدرس مقاله')
-    category = models.ManyToManyField(Category, verbose_name='دسته بندی')
+    category = models.ManyToManyField(Category, blank=True, verbose_name='دسته بندی')
     description = models.TextField(verbose_name='توضیحات')
     thumbnail = models.ImageField(upload_to='images', verbose_name='تصویر')
     publish = models.DateTimeField(default=timezone.now, verbose_name='زمان انتشار')
@@ -41,7 +41,7 @@ class Article(models.Model):
     def __str__(self):
         return self.title
 
-    # change publish datetime to local calender
+    # change publish datetime to local calender usnig new method
     def jpublish(self):
     	return jalali_converter(self.publish)
     # change jpublish column name in article list
