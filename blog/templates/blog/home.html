@@ -33,6 +33,11 @@
                         در
                         {{article.jpublish}}
                     </p>
+                    <div>
+                        {% for category in article.category.all %}
+                            <a href="#">#{{category.title}}</a>
+                        {% endfor %}
+                    </div>
                 </div>
                 <!-- Divider-->
                 <hr class="my-4" />
