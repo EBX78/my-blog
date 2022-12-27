@@ -4,7 +4,7 @@ from .models import Article, Category
 # view of home page
 def home(request):
 	context = {
-		'articles': Article.objects.filter(status='p'),    # get articles from model, for display in template
+		'articles': Article.objects.filter(status='p').order_by('-created'),
 		'categories': Category.objects.filter(status=True)
 	}
 	return render(request, 'blog/home.html', context)
@@ -12,7 +12,7 @@ def home(request):
 # view of each article page
 def detail(request, slug):
 	context = {
-		'article': get_object_or_404(Article, slug=slug, status='p'),    # get the article that called as slug in url with 404 erorr handler
+		'article': get_object_or_404(Article, slug=slug, status='p'),
 		'categories': Category.objects.filter(status=True)
 	}
 	return render(request, 'blog/detail.html', context)

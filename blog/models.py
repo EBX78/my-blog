@@ -2,20 +2,16 @@ from django.db import models
 from django.utils import timezone
 from extentions.utils import jalali_converter
 
-# recive data from admin panel with this template
 class Category(models.Model):
     title = models.CharField(max_length=200, verbose_name='عنوان دسته بندی')
     slug = models.SlugField(max_length=100, unique=True, verbose_name='آدرس دسته بندی')
     status = models.BooleanField(default=True, verbose_name='أیا نمایش داده شود؟')
     position = models.IntegerField(verbose_name='پوزیشن')
 
-    # change category title name to persian name
     class Meta:
         verbose_name = 'دسته بندی'
         verbose_name_plural = 'دسته بندی ها'
-        ordering = ['position']
 
-    # show category by title
     def __str__(self):
         return self.title
 
@@ -37,13 +33,14 @@ class Article(models.Model):
     class Meta:
         verbose_name = 'مقاله'
         verbose_name_plural = 'مقالات'
-        ordering = ['-publish']
 
     def __str__(self):
         return self.title
 
-    # change publish datetime to local calender usnig new method
     def jpublish(self):
     	return jalali_converter(self.publish)
-    # change jpublish column name in article list
     jpublish.short_description = "زمان انتشار"
+    
+    def str_category(self):
+        return [cat.title for cat in self.category.all()]
+    str_category.short_description = "دسته بندی"
